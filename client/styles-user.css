@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+a{
+    text-decoration: none;
+    color: var(--cor-clara);
+}
+
+body{
+    background-color: var(--vermelho-escuro);
+    font-family: 'Lilita One';
+    color: var(--cor-escura);
+}
+
+:root{
+    --cor-escura: #0D0005;
+    --cor-clara: #F2EBDC;
+    --vermelho-claro: #C0242F;
+    --vermelho-medio: #590212;
+    --vermelho-escuro: #26010B;
+}
+
+#nav{
+    background-color: var(--cor-escura);
+    padding: 20px;
+    color: var(--cor-clara);
+    font-family: 'Lilita One';
+    font-size: 16px;
+}
+
+#pesq{
+    margin-left: auto;
+    max-width: 50%;
+}
+
+div#menu>a>p{
+    display: inline;
+    margin: 25px;
+}
+
+#menu{
+    margin: auto;
+    max-width: 600px;
+}
+
+div#menu>a>p:hover{
+    color: var(--vermelho-claro);
+
+}
+
+#ft:hover{
+    color: var(--vermelho-claro);
+}
+
+#ftp{
+    max-width: 300px;
+    border-radius: 50%;
+    margin: auto;
+    display: block;
+}
+
+.areaft{
+    background-color: var(--cor-clara);
+    max-width: 90vw;
+    border-radius: 10px;
+    margin: auto;
+    padding: 25px;
+}
+
+#nome{
+   
+    color: var(--cor-escura);
+    width: 200px;
+    
+}
+
+#nome:hover{
+    cursor: pointer;
+    color: var(--vermelho-claro);
+}
+
+.cat{
+    margin-top: 10px;
+    text-indent: 10px;
+}
+
+.lifav:hover{
+    color: var(--vermelho-claro);
+
+}
+
+.lifav2{
+    font-size: 1.2em;
+    text-indent: 20px;
+    color: var(--cor-escura);
+}
+
+.lifav{
+    font-size: 1.2em;
+    text-indent: 20px;
+    color: var(--cor-escura);
+}
+
+article#bd{
+   border-bottom: 1px solid var(--cor-escura);
+    
+}
+
+#logopara{
+    background-color: gray;
+    max-width: 100%;
+    margin-top: 35px;
+    background-image: url(images/livros2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 350px;
+    background-position: center center;
+    padding: 50px;
+    
+}
+
+h1#rec{
+    margin: auto;
+    max-width: 400px;
+    color: var(--cor-clara);
+    padding: 5px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.451);
+}
+
+#dec{
+    text-align: justify;
+}
+
+.capalv{
+    max-width: 200px;
+    border-radius: 10px;
+    margin: auto;
+    display: block;
+}
+
+.arcapa{
+    max-width: 220px;
+    padding: 5px;
+    margin: auto;
+    border: 1px solid var(--cor-escura);
+    border-radius: 5px;
+}
+
+.basinf{
+    max-width: 700px;
+    margin: auto;
+}
+
+.ress{
+    margin: auto;
+    text-align: justify;
+    max-width: 700px;
+}
+
+section.infose{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.infose{
+    margin: auto;
+    border: 1px solid var(--cor-escura);
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 710px;
+}

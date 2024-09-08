@@ -1,0 +1,32 @@
+{
+    "books": [
+      {
+        "title": "O Senhor dos Anéis: A Sociedade do Anel",
+        "author": "J.R.R. Tolkien",
+        "publication_date": "1954-07-29",
+        "image_url": "images/capa-anel.jpg",
+        "url": "lotr.html"
+      },
+      {
+        "title": "Dom Quixote",
+        "author": "Miguel de Cervantes",
+        "publication_date": "1605-01-16",
+        "image_url": "images/capa-dom.jpg",
+        "url": "domquixote.html"
+      },
+      {
+        "title": "Strange Case of Dr Jekyll and Mr Hyde - O Médico e o Monstro",
+        "author": "Robert Louis Stevenson",
+        "publication_date": "1886-01-05",
+        "image_url": "images/capa-med.jpg",
+        "url": "omedicoemonstro.html"
+      },
+      {
+        "title": "Memórias Póstumas de Brás Cubas",
+        "author": "Machado de Assis",
+        "publication_date": "1881-01-01",
+        "image_url": "images/capa-mem.jpg",
+        "url": "memoriaspostumas.html"
+      }
+    ]
+  }

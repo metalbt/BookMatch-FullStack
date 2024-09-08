@@ -1,0 +1,53 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body,html{
+    max-height: 99vh;
+}
+
+body{
+    background: url(images/LOGIN.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    background-position: center center;
+}
+
+main{
+    margin: auto;
+    margin-top: 10%;
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    padding: 45px;
+    border-radius: 10px;
+    text-align: justify;
+}
+
+
+h1{
+    font-size: 22px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+#mark:hover{
+    cursor: pointer;
+}
+
+.logol-r{
+    max-width: 70px;
+    margin: auto;
+    display: block;
+    margin-bottom: 10px;
+}
