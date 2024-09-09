@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "start":"node server.js",
-    "db:load":"node src/database/load.js"
+    "db:load":"node src/database/load.js",
+    "db:drop": "rm src/database/db.sqlite"
   },
   "author": "",
   "license": "ISC",
