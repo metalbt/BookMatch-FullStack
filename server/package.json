@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start":"node server.js",
-    "db:load":"node src/database/load.js",
+    "start": "node server.js",
+    "db:load": "node src/database/load.js",
     "db:drop": "rm src/database/db.sqlite"
   },
   "author": "",
@@ -12,9 +12,14 @@
   "description": "",
   "type": "module",
   "dependencies": {
+    "@prisma/client": "^5.20.0",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "morgan": "^1.10.0",
+    "prisma": "^5.20.0",
     "sqlite-async": "^1.2.0"
+  },
+  "prisma": {
+    "seed": "node prisma/seeders.js"
   }
 }

@@ -1,19 +1,27 @@
-import Database from "../database/database.js";
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 async function allBooks() {
-  const db = await Database.connect();
+  const books = await prisma.books.findMany({
+    include: {
+      user: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
 
-  const sql = `
-    SELECT 
-        books.*, 
-        user.name
-    FROM books
-    JOIN user ON books.id = user.id;
-    `;
-
-  const books = await db.all(sql);
-  console.log(books)
-  return books
+  console.log(books);
+  return books;
 }
 
-export default { allBooks}
+async function createBook(data) {
+  const book = await prisma.books.create({
+    data,
+  });
+  return book;
+}
+
+export default { allBooks, createBook };
