@@ -1,7 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import router from './src/routes.js'; // Ajuste o caminho conforme necessário
+import router from './src/routes.js';  // Caminho absoluto
 
 const app = express();
 const PORT = 3000;
@@ -59,12 +59,6 @@ app.get('/domquixote', (req, res) => {
 
 app.get('/lotr', (req, res) => {
   res.sendFile('lotr.html', { root: 'public' });
-});
-
-// Rota 404 (Página não encontrada)
-app.use((req, res, next) => {
-  console.log('Página não encontrada');
-  res.status(404).sendFile('404.html', { root: 'public' });
 });
 
 // Iniciar o servidor

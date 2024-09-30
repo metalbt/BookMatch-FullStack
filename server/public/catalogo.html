@@ -79,7 +79,7 @@
                 
                   <script>
                     
-                    fetch('http://localhost:3000/books')
+                    fetch('http://localhost:3000/api/books')
                       .then(response => response.json())
                       .then(data => {
                         const bookList = document.getElementById('book-list');
@@ -92,7 +92,7 @@
                 <div>
                   <h2><a href="${book.url}">${book.title}</a></h2>
                   <p><strong>Autor:</strong> ${book.author}</p>
-                  <p><strong>Usuário:</strong> ${book.name}</p>
+                  <p><strong>Usuário:</strong> ${book.user.name} </p> 
                   <p><strong>Data de Publicação:</strong> ${book.publication_date}</p>
                 </div>
                           `;
