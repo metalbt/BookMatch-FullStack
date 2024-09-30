@@ -16,20 +16,41 @@
         <form style="width: 230px;">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Endereço de Email</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
               <div id="emailHelp" class="form-text">Nunca compartilharemos seu e-mail com mais ninguém.</div>
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Senha</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <input type="password" class="form-control" id="exampleInputPassword1" name="password">
             </div>
 
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Repita sua senha</label>
                 <input type="password" class="form-control" id="exampleInputPassword1">
               </div>
-              <a class="btn btn-danger" href="user.html" role="button" style="width: 100px; border-radius: 5px;">Registrar</a>
+              <button class="btn btn-danger">Registrar</button>
           </form>
     </main>
 </body>
+<script>
+  const form = document.querySelector("form")
+  form.addEventListener('submit', async(event) => {
+    event.preventDefault();
+ 
+    const user = Object.fromEntries(new FormData(form));
+    const response = await fetch("http://localhost:3000/api/register", {
+      method: "POST",
+      mode: 'cors',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    })
+    if(response.ok){
+      alert("registrado com sucesso")
+    }else{
+      alert("algo deu errado")
+    }
+  })
+</script>
 </html>
