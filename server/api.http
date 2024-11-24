@@ -9,3 +9,29 @@ Content-Type: application/json
     "email": "paulo@gmail.com",
     "password": "123456"
 }
+
+### Signin 401
+ 
+# @name signin
+POST http://localhost:3000/api/register
+Content-Type: application/json
+ 
+{
+  "email": "lopes@email.com",
+  "password": "321"
+}
+
+### Signin Ok
+ 
+# @name signin
+POST http://localhost:3000/api/register
+Content-Type: application/json
+ 
+{
+  "email": "luiz@email.com",
+  "password": "12345678"
+}
+
+### Read User (whitout token)
+ 
+GET http://localhost:3000/users/me

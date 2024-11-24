@@ -1,11 +1,15 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import booksController from './models/books.js'; // Ajuste o caminho conforme necessário
 import Users from './models/users.js';
+
+import { isAuthenticated } from './middleware/auth.js';
 
 const router = express.Router();
 
 // Rota para obter todos os livros
-router.get('/books', async (req, res) => {
+router.get('/books', isAuthenticated , async (req, res) => {
   try {
     const books = await booksController.allBooks();
     res.json(books);
@@ -16,7 +20,7 @@ router.get('/books', async (req, res) => {
 });
 
 // Rota para criar um novo livro
-router.post('/books', async (req, res) => {
+router.post('/books', isAuthenticated , async (req, res) => {
   const { title, author, publication_date, image_url, url, description, userId } = req.body;
   try {
     const book = await booksController.createBook({
@@ -35,7 +39,7 @@ router.post('/books', async (req, res) => {
   }
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', isAuthenticated , async (req, res) => {
   const {email, password} = req.body
   try{
     if(!email || !password){
@@ -53,6 +57,44 @@ router.post('/register', async (req, res) => {
   }catch(e) {
     console.log(e)
     res.status(500).json({ error: 'Erro ao registrar-se' });
+  }
+});
+
+router.get('/users/me', isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.userId;
+ 
+    const user = await User.readById(userId);
+ 
+    delete user.password;
+ 
+    return res.json(user);
+  } catch (error) {
+    throw new HTTPError('Unable to find user', 400);
+  }
+});
+
+router.post('../public/registro', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+ 
+    const { id: userId, password: hash } = await User.read({ email });
+ 
+    const match = await bcrypt.compare(password, hash);
+ 
+    if (match) {
+      const token = jwt.sign(
+        { userId },
+        process.env.JWT_SECRET,
+        { expiresIn: 3600000 } // 1h
+      );
+ 
+      return res.json({ auth: true, token });
+    } else {
+      throw new Error('User not found');
+    }
+  } catch (error) {
+    res.status(401).json({ error: 'User not found' });
   }
 })
 
