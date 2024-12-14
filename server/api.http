@@ -35,3 +35,5 @@ Content-Type: application/json
 ### Read User (whitout token)
  
 GET http://localhost:3000/users/me
+
+POST http://localhost:3000/users/

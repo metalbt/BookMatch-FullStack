@@ -38,6 +38,7 @@
     event.preventDefault();
  
     const user = Object.fromEntries(new FormData(form));
+    console.log(user)
     const response = await fetch("http://localhost:3000/api/register", {
       method: "POST",
       mode: 'cors',

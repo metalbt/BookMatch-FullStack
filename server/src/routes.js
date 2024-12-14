@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import booksController from './models/books.js'; // Ajuste o caminho conforme necessário
 import Users from './models/users.js';
-
 import { isAuthenticated } from './middleware/auth.js';
 
 const router = express.Router();
@@ -39,16 +38,16 @@ router.post('/books', isAuthenticated , async (req, res) => {
   }
 });
 
-router.post('/register', isAuthenticated , async (req, res) => {
+router.post('/register', async (req, res) => {
   const {email, password} = req.body
   try{
     if(!email || !password){
       return res.status(400).json({"error":"algo deu errado"})
     }
-
+    const hash = await bcrypt.hash(password, 10);
     const newUser = await Users.createUser({
       email,
-      password,
+      password: hash,
       name: "novo usuario",
       image_url: "https://wallpapers.com/images/hd/ricardo-milos-zsh9ovovkwahf2hh.jpg"
     })
@@ -74,11 +73,12 @@ router.get('/users/me', isAuthenticated, async (req, res) => {
   }
 });
 
-router.post('../public/registro', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
  
-    const { id: userId, password: hash } = await User.read({ email });
+    const { id: userId, password: hash } = await Users.readUserByEmail(email);
+    console.log(userId, hash)
  
     const match = await bcrypt.compare(password, hash);
  
@@ -94,8 +94,9 @@ router.post('../public/registro', async (req, res) => {
       throw new Error('User not found');
     }
   } catch (error) {
+    console.error(error);
     res.status(401).json({ error: 'User not found' });
   }
-})
+});
 
 export default router;
