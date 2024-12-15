@@ -4,11 +4,13 @@ import bcrypt from 'bcrypt';
 import booksController from './models/books.js'; // Ajuste o caminho conforme necessário
 import Users from './models/users.js';
 import { isAuthenticated } from './middleware/auth.js';
+import { z } from 'zod';
+import { validate } from './middleware/validate.js';
 
 const router = express.Router();
 
 // Rota para obter todos os livros
-router.get('/books', isAuthenticated , async (req, res) => {
+router.get('/books', isAuthenticated, async (req, res) => {
   try {
     const books = await booksController.allBooks();
     res.json(books);
@@ -38,7 +40,15 @@ router.post('/books', isAuthenticated , async (req, res) => {
   }
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register',   validate(
+  z.object({
+    body: z.object({
+      email: z.string().email(),
+      password: z.string().min(8),
+      passwordcon: z.string().min(8),
+    }),
+  })
+), async (req, res) => {
   const {email, password} = req.body
   try{
     if(!email || !password){
@@ -73,7 +83,14 @@ router.get('/users/me', isAuthenticated, async (req, res) => {
   }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login',   validate(
+  z.object({
+    body: z.object({
+      email: z.string().email(),
+      password: z.string().min(8),
+    }),
+  })
+), async (req, res) => {
   try {
     const { email, password } = req.body;
  
