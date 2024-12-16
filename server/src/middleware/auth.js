@@ -15,5 +15,11 @@ function isAuthenticated(req, res, next) {
     res.status(401).send({ auth: false, message: 'Token invalid.' });
   }
 }
+
+function signout() {
+  localStorage.removeItem('@token');
  
-export { isAuthenticated };
+  window.location.href = '/login.html';
+}
+ 
+export { isAuthenticated, signout };
