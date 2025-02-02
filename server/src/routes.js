@@ -6,6 +6,7 @@ import Users from './models/users.js';
 import { isAuthenticated } from './middleware/auth.js';
 import { z } from 'zod';
 import { validate } from './middleware/validate.js';
+import SendMail from './services/SendMail.js';
 
 const router = express.Router();
 
@@ -61,7 +62,7 @@ router.post('/register',   validate(
       name: "novo usuario",
       image_url: "https://wallpapers.com/images/hd/ricardo-milos-zsh9ovovkwahf2hh.jpg"
     })
-
+    await SendMail.createNewUser(email)
     res.status(201).json(newUser);
   }catch(e) {
     console.log(e)
