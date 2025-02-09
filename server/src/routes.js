@@ -7,6 +7,7 @@ import { isAuthenticated } from './middleware/auth.js';
 import { z } from 'zod';
 import { validate } from './middleware/validate.js';
 import SendMail from './services/SendMail.js';
+import SendMail2 from './services/SendMail2.js';
 
 const router = express.Router();
 
@@ -94,7 +95,7 @@ router.post('/login',   validate(
 ), async (req, res) => {
   try {
     const { email, password } = req.body;
- 
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     const { id: userId, password: hash } = await Users.readUserByEmail(email);
     console.log(userId, hash)
  
@@ -106,12 +107,12 @@ router.post('/login',   validate(
         process.env.JWT_SECRET,
         { expiresIn: 3600000 } // 1h
       );
- 
+      await SendMail2.sendLoginNotification(email, ip);
       return res.json({ auth: true, token });
     } else {
       throw new Error('User not found');
     }
-  } catch (error) {
+  }catch (error) {
     console.error(error);
     res.status(401).json({ error: 'User not found' });
   }
