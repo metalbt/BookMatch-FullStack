@@ -90,6 +90,7 @@
       const data = await response.json();
       if (data.auth) {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
         alert("Login bem sucedido");
         window.location.href = "/home.html";
       } else {

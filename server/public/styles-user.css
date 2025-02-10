@@ -56,7 +56,7 @@ div#menu>a>p:hover{
     color: var(--vermelho-claro);
 }
 
-#ftp{
+#image_user{
     max-width: 300px;
     border-radius: 50%;
     margin: auto;
@@ -174,4 +174,17 @@ section.infose{
     padding: 5px;
     border-radius: 5px;
     max-width: 710px;
+}
+
+#bt_ed a{
+    color: #0D0005 !important;
+}
+
+#bt_ed{
+    text-align: center;
+}
+
+#bt_ed a:hover{
+    color: var(--vermelho-claro) !important;
+    text-decoration: underline;
 }

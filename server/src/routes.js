@@ -8,6 +8,8 @@ import { z } from 'zod';
 import { validate } from './middleware/validate.js';
 import SendMail from './services/SendMail.js';
 import SendMail2 from './services/SendMail2.js';
+import multer from 'multer';
+import uploadConfig from './config/multer.js';
 
 const router = express.Router();
 
@@ -60,8 +62,8 @@ router.post('/register',   validate(
     const newUser = await Users.createUser({
       email,
       password: hash,
-      name: "novo usuario",
-      image_url: "https://wallpapers.com/images/hd/ricardo-milos-zsh9ovovkwahf2hh.jpg"
+      name: "Novo Leitor",
+      image_url: "https://www.dexerto.com/cdn-image/wp-content/uploads/2024/09/13/jujutsu-kaisen-higuruma.jpeg"
     })
     await SendMail.createNewUser(email)
     res.status(201).json(newUser);
@@ -71,7 +73,7 @@ router.post('/register',   validate(
   }
 });
 
-router.get('/users/me', isAuthenticated, async (req, res) => {
+router.get('/users/me', async (req, res) => {
   try {
     const userId = req.userId;
  
@@ -96,7 +98,7 @@ router.post('/login',   validate(
   try {
     const { email, password } = req.body;
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    const { id: userId, password: hash } = await Users.readUserByEmail(email);
+    const { id: userId, password: hash, ...userData } = await Users.readUserByEmail(email);
     console.log(userId, hash)
  
     const match = await bcrypt.compare(password, hash);
@@ -108,7 +110,7 @@ router.post('/login',   validate(
         { expiresIn: 3600000 } // 1h
       );
       await SendMail2.sendLoginNotification(email, ip);
-      return res.json({ auth: true, token });
+      return res.json({ auth: true, token, user: userData });
     } else {
       throw new Error('User not found');
     }
@@ -117,5 +119,53 @@ router.post('/login',   validate(
     res.status(401).json({ error: 'User not found' });
   }
 });
+
+router.put(
+  '/users/image',
+  isAuthenticated,
+  multer(uploadConfig).single('image'),
+  async (req, res) => {
+    
+    try {
+      const userId = req.userId;
+      console.log(userId)
+      if (req.file) {
+        const path = `/images/profile/${req.file.filename}`;
+ 
+        await Users.updateImage({ userId, path });
+ 
+        res.status(200).json({ path });
+      } else {
+        res.status(400).json({ error: 'Invalid file type' });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Unable to create image' });
+    }
+  }
+);
+
+router.put(
+  '/users/back',
+  isAuthenticated,
+  multer(uploadConfig).single('image'),
+  async (req, res) => {
+    try {
+      const userId = req.userId;
+ 
+      if (req.file) {
+        const path = `/images/profile/${req.file.filename}`;
+ 
+        const image = await Users.updateBack({ userId, path });
+ 
+        res.json(image);
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      throw new HTTPError('Unable to create image', 400);
+    }
+  }
+);
 
 export default router;

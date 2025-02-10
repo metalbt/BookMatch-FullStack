@@ -69,3 +69,5 @@ app.get('/lotr', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+app.use(express.urlencoded({ extended: true }));

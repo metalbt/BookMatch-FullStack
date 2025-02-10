@@ -15,7 +15,8 @@ model User {
   name        String
   email       String  @unique
   password    String
-  image_url   String
+  image_url   String?
+  back_url    String?
   description String?
   books Books[]
 }
