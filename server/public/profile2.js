@@ -1,41 +1,36 @@
-const user_back = document.getElementById('back_user');
+
+const user_background = document.getElementById('back_user');
 document.addEventListener('DOMContentLoaded', () => {
-    const User = JSON.parse(localStorage.getItem('user'));
-    const user_name = document.getElementById('name_user');
-    user_name.innerHTML = User.name;
-    user_back.src = User.back_url;
+    const User2 = JSON.parse(localStorage.getItem('user'));
+    const user_name2 = document.getElementById('name_user');
+    user_name2.innerHTML = User2.name;
+    user_background.src = User2.back_url
+});
 
-
-    
-})
-
-const form = document.getElementById('form_image2');
-const Token = localStorage.getItem('token');
-form.addEventListener('submit', async (e) => {
+const form2 = document.getElementById('form_image2');
+const Token2 = localStorage.getItem('token');
+form2.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    const back_input = document.getElementById('back_input');
-    formData.append('back', back_input.files[0]);
-    console.log(formData)
-    const response = await fetch(`http://localhost:3000/api/users/back`, {
+    const formData2 = new FormData();
+    const back_input2 = document.getElementById('back_input');
+    formData2.append('back', back_input2.files[0]);
+    console.log(formData2);
+    const response2 = await fetch(`http://localhost:3000/api/users/back`, {
         method: 'PUT',
         headers: {
             Authorization: `Bearer ${Token}`,
         },
-        body: formData,
+        body: formData2,
     });
-    console.log(Token)
-    if (response.ok) {
-     /*   const user = await response.json();
-        localStorage.setItem('user', JSON.stringify(user));
-        window.location.reload(); */
-        const path = (await response.json()).path;
-        console.log(path)
+    console.log(Token);
+    if (response2.ok) {
+        const path2 = (await response2.json()).path;
+        console.log(path2);
         
-        const User = await JSON.parse(localStorage.getItem('user'));
-        User.back_url = path;
-        localStorage.setItem('user', JSON.stringify(User));
-        user_back.src = path;
+        const User2 = await JSON.parse(localStorage.getItem('user'));
+        User2.back_url = path2;
+        localStorage.setItem('user', JSON.stringify(User2));
+        user_background.src = path2;
         alert('Plano de fundo atualizado com sucesso');
     } else {
         console.error('Erro ao atualizar plano de fundo');

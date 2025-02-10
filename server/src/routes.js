@@ -63,6 +63,7 @@ router.post('/register',   validate(
       email,
       password: hash,
       name: "Novo Leitor",
+      back_url: "https://cdn.photoroom.com/v2/image-cache?path=gs://background-7ef44.appspot.com/backgrounds_v3/black/47_-_black.jpg",
       image_url: "https://www.dexerto.com/cdn-image/wp-content/uploads/2024/09/13/jujutsu-kaisen-higuruma.jpeg"
     })
     await SendMail.createNewUser(email)
@@ -148,7 +149,7 @@ router.put(
 router.put(
   '/users/back',
   isAuthenticated,
-  multer(uploadConfig).single('image'),
+  multer(uploadConfig).single('back'),
   async (req, res) => {
     try {
       const userId = req.userId;
