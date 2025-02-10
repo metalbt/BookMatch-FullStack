@@ -1,23 +1,23 @@
-const user_image = document.getElementById('image_user');
+const user_back = document.getElementById('back_user');
 document.addEventListener('DOMContentLoaded', () => {
     const User = JSON.parse(localStorage.getItem('user'));
     const user_name = document.getElementById('name_user');
     user_name.innerHTML = User.name;
-    user_image.src = User.image_url;
+    user_back.src = User.back_url;
 
 
     
 })
 
-const form = document.getElementById('form_image');
+const form = document.getElementById('form_image2');
 const Token = localStorage.getItem('token');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    const image_input = document.getElementById('image_input');
-    formData.append('image', image_input.files[0]);
+    const back_input = document.getElementById('back_input');
+    formData.append('back', back_input.files[0]);
     console.log(formData)
-    const response = await fetch(`http://localhost:3000/api/users/image`, {
+    const response = await fetch(`http://localhost:3000/api/users/back`, {
         method: 'PUT',
         headers: {
             Authorization: `Bearer ${Token}`,
@@ -33,11 +33,11 @@ form.addEventListener('submit', async (e) => {
         console.log(path)
         
         const User = await JSON.parse(localStorage.getItem('user'));
-        User.image_url = path;
+        User.back_url = path;
         localStorage.setItem('user', JSON.stringify(User));
-        user_image.src = path;
-        alert('Imagem de perfil atualizada com sucesso');
+        user_back.src = path;
+        alert('Plano de fundo atualizado com sucesso');
     } else {
-        console.error('Erro ao atualizar imagem de perfil');
+        console.error('Erro ao atualizar plano de fundo');
     }
 });

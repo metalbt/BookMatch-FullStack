@@ -156,14 +156,15 @@ router.put(
       if (req.file) {
         const path = `/images/profile/${req.file.filename}`;
  
-        const image = await Users.updateBack({ userId, path });
+        await Users.updateBack({ userId, path });
  
-        res.json(image);
+        res.status(200).json({ path });
       } else {
-        throw new Error();
+        res.status(400).json({ error: 'Invalid file type' });
       }
     } catch (error) {
-      throw new HTTPError('Unable to create image', 400);
+      console.log(error);
+      res.status(500).json({ error: 'Unable to create image' });
     }
   }
 );

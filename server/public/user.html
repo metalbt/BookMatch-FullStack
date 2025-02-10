@@ -52,13 +52,17 @@
         </header>
 <body>
     <main class="areaft">
-        <div>
+        <div id="bc">
             <img  id="image_user" src="images/gojo2.jpg" alt="Foto de Perfil">
+            <img id="back_user" src="https://plus.unsplash.com/premium_photo-1668091148044-056cd744e64a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGxhbm8lMjBkZSUyMGZ1bmRvJTIwbnV2ZW18ZW58MHx8MHx8fDA%3D" alt="plano de fundo">
         </div>
         <p id="bt_ed">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            <a style="margin-right: 10px;" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
               >Editar imagem</a
             >
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+            >Editar plano de fundo</a
+          >
           </p>
         </div>
       </div>
@@ -109,13 +113,60 @@
           </div>
         </div>
       </form>
+
+      <form id="form_image2" enctype="multipart/form-data">
+        <div
+          class="modal fade"
+          id="exampleModal2"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Carregar Plano de Fundo
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+            
+   
+                <input type="file" id="back_input" name="image" required accept="image/png, image/gif, image/jpeg" />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  data-bs-dismiss="modal"
+                >
+                  Carregar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
    
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"
       ></script>
-      <script src="profile.js"></script>
+      <script src="profile.js" src="profile2.js" ></script>
         <section>
             <h1 id= "name_user">Nome: Joao</h1>
         </section>
