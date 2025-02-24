@@ -5,7 +5,9 @@
   "scripts": {
     "start": "node server.js",
     "db:load": "node src/database/load.js",
-    "db:drop": "rm src/database/db.sqlite"
+    "db:drop": "rm src/database/db.sqlite",
+    "test": "node --test",
+    "e2e": "playwright test"
   },
   "author": "",
   "license": "ISC",
@@ -28,5 +30,10 @@
   },
   "prisma": {
     "seed": "node prisma/seeders.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.5",
+    "supertest": "^7.0.0"
   }
 }

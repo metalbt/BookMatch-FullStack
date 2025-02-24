@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import booksController from './models/books.js'; // Ajuste o caminho conforme necessário
 import Users from './models/users.js';
 import { isAuthenticated } from './middleware/auth.js';
-import { z } from 'zod';
+import { string, z } from 'zod';
 import { validate } from './middleware/validate.js';
 import SendMail from './services/SendMail.js';
 import SendMail2 from './services/SendMail2.js';
@@ -35,7 +35,7 @@ router.post('/books', isAuthenticated , async (req, res) => {
       image_url,
       url,
       description,
-      userId,
+      userId: String(userId),
     });
     res.status(201).json(book);
   } catch (error) {
